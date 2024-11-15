@@ -24,10 +24,14 @@ namespace EjericioTelegrama
             int numPalabras;
             double coste;
 
-            // Verificar si es urgente
-            if (chkUrgente.Checked)
+            // Verificar si es urgente u ordinario
+            if (rbUrgente.Checked)
             {
                 tipoTelegrama = 'u';
+            }
+            else if (rbOrdinario.Checked)
+            {
+                tipoTelegrama = 'o';
             }
 
             // Obtener el número de palabras en el telegrama
@@ -45,7 +49,7 @@ namespace EjericioTelegrama
                     coste = 2.5 + 0.5 * (numPalabras - 10);
                 }
             }
-            else // Tipo urgente
+            else if (tipoTelegrama == 'u') // Tipo urgente
             {
                 if (numPalabras <= 10)
                 {
@@ -55,6 +59,10 @@ namespace EjericioTelegrama
                 {
                     coste = 5 + 0.75 * (numPalabras - 10);
                 }
+            }
+            else
+            {
+                coste = 0; // Caso por defecto si no se selecciona nada
             }
 
             txtPrecio.Text = coste.ToString("F2") + " euros";
